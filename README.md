@@ -1,26 +1,28 @@
-# TechForge Hardware - PDV & Gerenciador de Estoque 💻
+# TechForge Hardware | Sistema de PDV e Gestão de Estoque 💻
 
-Um sistema back-end de Ponto de Venda (PDV) e Gerenciamento de Estoque construído puramente em Java. Este projeto simula a lógica transacional de uma loja de peças de informática, focado na aplicação rigorosa dos pilares da Programação Orientada a Objetos (POO).
+Este repositório contém o desenvolvimento completo de um sistema corporativo de Ponto de Venda (PDV) e Almoxarifado para uma loja de peças de informática. O projeto foi construído puramente em Java e reflete a evolução de uma arquitetura de software em duas fases distintas: desde a consolidação das lógicas de negócio no terminal (CLI) até a implementação de uma Interface Gráfica (GUI) com persistência em memória via Collections.
 
-## 🚀 Funcionalidades (Versão Terminal)
+## 🚀 Fase 1: Entrega Parcial (Core Lógico e CLI)
 
-* **Módulo de Almoxarifado (Cadastros):** Inserção de componentes físicos (Processadores, Placas de Vídeo, Memórias RAM e Placas-Mãe) com validação de regras de negócio.
-* **Frente de Caixa (PDV):** Sistema de carrinho de compras que utiliza código numérico (ID) para dar baixa automática no estoque físico.
-* **Auditoria e Relatórios:** Rastreamento do histórico de vendas, identificação do operador (matrícula) e do cliente (CPF), com cálculo automático de receita total.
-* **Promoções Dinâmicas:** Aplicação de descontos específicos por tipo de hardware através de contratos de interface.
+A primeira etapa do projeto teve como foco o desenvolvimento do "motor" do sistema, garantindo regras de negócio rígidas e a aplicação dos pilares da Programação Orientada a Objetos.
 
-## 🧠 Arquitetura e Padrões Aplicados
+* **Almoxarifado Inteligente:** Cadastro de peças físicas (Processadores, Placas de Vídeo, Memórias RAM e Placas-Mãe) utilizando Herança e Polimorfismo.
+* **Motor de Vendas e Comissões:** Lógica de carrinho de compras com baixa automática no estoque. Inclusão de um gerador de comissões escalonadas para vendedores baseado em agrupamento financeiro (metas de vendas).
+* **Tratamento de Exceções Customizadas:** Criação de classes de erro próprias de domínio (`EstoqueInvalidoException`, `PrecoInvalidoException`) para blindar o sistema contra entradas maliciosas ou falhas humanas de digitação.
+* **Interface via Terminal:** Navegação em menus de múltiplas camadas blindados com laços de repetição lógicos, garantindo uma operação sem *crashes*.
 
-Este projeto foi desenvolvido com foco em escalabilidade e manutenção de código, utilizando:
-* **Herança e Polimorfismo:** Classe abstrata `Hardware` como superclasse, permitindo que o carrinho de compras (`List<Hardware>`) aceite qualquer componente dinamicamente.
-* **Encapsulamento e Reflexividade:** Proteção de estado das entidades e uso de classes compostas (Ex: Objeto `Fabricante` dentro de `Hardware`).
-* **Interfaces:** Implementação do contrato `Promocional` para garantir que novas peças possuam regras de precificação.
-* **Tratamento de Exceções Customizadas:** Criação de exceções de domínio (`EstoqueInvalidoException`, `PrecoInvalidoException`, `EstoqueExcedidoException`) para blindar o sistema contra erros de operação ou falhas de input humano (buffer do Scanner).
+## 🚀 Fase 2: Entrega Final (Interface Gráfica e Collections)
 
-## 🛠️ Tecnologias Utilizadas
-* **Linguagem:** Java (JDK 17+)
-* **Paradigma:** Orientação a Objetos (POO)
-* **Interface:** Command Line Interface (CLI)
+A segunda etapa marca a migração do sistema para um ambiente visual interativo (Desktop), substituindo os menus do terminal por formulários responsivos, seguindo rigorosos padrões de projeto.
+
+* **Interface Gráfica (Java Swing):** Construção de formulários (`JFrame`) através da IDE NetBeans, utilizando componentes nativos como `JTable`, `JComboBox`, `JTextField` e `JOptionPane` para uma navegação fluida através de menus (`JMenuBar`).
+* **Banco de Dados em Memória (Collections):** Implementação de classes de banco de dados (`BDEstoque`, `BDVendas`) baseadas exclusivamente em `List/ArrayList` para armazenar o estado da aplicação.
+* **Operações CRUD Completas:** Os bancos de dados suportam integralmente as quatro operações fundamentais: Inserção (Create), Consulta Individual e em Grupo (Read), Alteração (Update) e Exclusão (Delete).
+* **Padrão de Projeto Singleton:** Aplicação estrita do *Singleton Design Pattern* tanto nas instâncias de Banco de Dados quanto na invocação das janelas (`JFrames`), garantindo a integridade dos dados e impedindo a duplicidade de formulários abertos simultaneamente.
+
+## 🧠 Arquitetura e Engenharia Aplicada
+
+Este software foi desenhado para simular o rigor de um ERP corporativo, separando claramente as responsabilidades das classes visuais (Views) das regras de banco (Data) e entidades lógicas (Models). Todo o projeto foi construído sem dependências externas, utilizando apenas o ecossistema nativo do Java (JDK 17+).
 
 ## 👨‍💻 Autor
 **Otávio Felício**
